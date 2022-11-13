@@ -41,7 +41,7 @@ end
 
 function _update_title()
 	if tscreen.y<0 then
-	 tscreen.y+=4
+	tscreen.y+=4
 	else
 		menu.active=true
 	end
@@ -90,7 +90,7 @@ function _init_credits()
 	_drw=_draw_credits
 	t=0
 	credit_i=1
- ct=150
+	ct=150
 	credit_roll=1
 	credit_cols={137,12}
 	music(15)
@@ -270,8 +270,8 @@ stars = {
 			s.x-=s.ci*self.dx
 			-- delete old stars
 			if s.x<-1 then
-			 if (flap.alive and s.ci==3) stats.savoid+=1
-			 del(self.data,self.data[i])
+				if (flap.alive and s.ci==3) stats.savoid+=1
+				del(self.data,self.data[i])
 			end
 		end
 	end,
@@ -310,7 +310,7 @@ flap={
 	alive=true,
 	tod=0, -- time of death
 	update=function(self)
-	 if self.alive then
+	if self.alive then
 			self:set_spm()
 			self:check()
 		else
@@ -500,7 +500,7 @@ ptorps={
 			a.x+=self.v
 			-- delete old torps
 			if a.x<-8 or not a.active then
-			 del(self.a,self.a[i])
+				del(self.a,self.a[i])
 			end
 		end
 		-- cooldown
@@ -514,8 +514,8 @@ ptorps={
 		end
 		if (self.rct>0) self.rct-=1
 		if flap.alive and self.rc and t%100==0 and self.n<self.m then
-		 self.n+=1
-	 end
+			self.n+=1
+		end
 	end,
 	draw=function(self)
 		palt(0,true)
@@ -551,10 +551,10 @@ ptorps={
 }
 
 btorps={
- init=function(self)
- 	self.a={}
+	init=function(self)
+		self.a={}
 		self.ss={20,21}
- end,
+	end,
 	update=function(self)
 		for i,a in pairs(self.a) do
 			a.x+=a.dx
@@ -564,7 +564,7 @@ btorps={
 						a.y<0 or a.y>128 or
 						not a.active
 			then
-			 del(self.a,self.a[i])
+				del(self.a,self.a[i])
 			end
 		end
 	end,
@@ -597,9 +597,9 @@ function flaps_collision()
 		if flap.alive and c.alive then
 			for p in all(flap.spm) do
 				if p.x > c.x and
-						 p.x < c.x+16 and
-						 p.y > c.y and
-						 p.y < c.y+16
+						p.x < c.x+16 and
+						p.y > c.y and
+						p.y < c.y+16
 				then
 					flap.alive=false
 					flap.tod=t
@@ -661,7 +661,7 @@ function stars_collision()
 		if s.ci==3 then
 			for i in all(flap.spm) do
 				if flr(s.x)==i.x and
-						 flr(s.y)==i.y
+						flr(s.y)==i.y
 				then
 					flap.alive=false
 					flap.tod=t
@@ -680,18 +680,18 @@ end
 -- utility
 
 function hcenter(s)
-  -- screen center minus the
-  -- string length times the 
-  -- pixels in a char's width,
-  -- cut in half
-  return 64-#s*2
+	-- screen center minus the
+	-- string length times the 
+	-- pixels in a char's width,
+	-- cut in half
+	return 64-#s*2
 end
- 
+
 function vcenter(s)
-  -- screen center minus the
-  -- string height in pixels,
-  -- cut in half
-  return 61
+	-- screen center minus the
+	-- string height in pixels,
+	-- cut in half
+	return 61
 end
 
 function fiddy()
@@ -709,7 +709,7 @@ pgen={
 			p.x+=p.dx
 			p.y+=p.dy
 			if p.x<0 or p.x>128 or
-					 p.y<0 or p.y>128
+					p.y<0 or p.y>128
 			then
 				del(self.particles,self.particles[i])
 			end
@@ -821,9 +821,9 @@ scenario={
 		end
 		if (diag.sp) diag.sp()
 		if diag.fx and not diag.fxd then
-		 diag.fx()
-		 diag.fxd=true
-	 end
+			diag.fx()
+			diag.fxd=true
+		end
 	end
 }
 
@@ -1054,13 +1054,13 @@ menu={
 				sfx(41,2)
 			end
 			if btnp(➡️) and self.mode<#self.options[self.option].options then
-			 self.mode+=1
-			 sfx(41,2)
-		 end
-		 -- mode select direction check
-		 self.can_move.left=self.mode>1
-		 self.can_move.right=self.mode<#self.options[self.option].options
-		 -- return to main options
+				self.mode+=1
+				sfx(41,2)
+			end
+			-- mode select direction check
+			self.can_move.left=self.mode>1
+			self.can_move.right=self.mode<#self.options[self.option].options
+			-- return to main options
 			if btnp(⬆️) or btnp(⬇️) or btnp(❎) then
 				self.mselect="main"
 				sfx(42,2)
